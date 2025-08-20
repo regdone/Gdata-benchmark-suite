@@ -2,10 +2,17 @@ import tensorflow as tf
 from tensorflow.keras import datasets, layers, models
 import time
 
-print("=== Training CIFAR-10 on CPU ===")
+print("=== Training CIFAR-10 on GPU ===")
 
-# Chạy trên CPU
-tf.config.set_visible_devices([], 'GPU')
+# Explicitly chọn GPU (nếu có)
+gpus = tf.config.list_physical_devices('GPU')
+if gpus:
+    try:
+        tf.config.experimental.set_memory_growth(gpus[0], True)
+    except RuntimeError as e:
+        print(e)
+else:
+    print("No GPU found!")
 
 # Load CIFAR-10 dataset
 (x_train, y_train), (x_test, y_test) = datasets.cifar10.load_data()
@@ -31,10 +38,10 @@ def build_model():
 # Build model
 model = build_model()
 
-# Training (2 lần để so sánh ổn định hơn)
+# Training (2 lần để thấy GPU thực sự nhanh hơn)
 for run in range(2):
     print(f"\n--- Run {run+1} ---")
     start = time.time()
     history = model.fit(x_train, y_train, epochs=5, batch_size=256, verbose=2)
     end = time.time()
-    print(f"Training finished in {end-start:.2f} seconds (CPU, run {run+1})")
+    print(f"Training finished in {end-start:.2f} seconds (GPU, run {run+1})")
