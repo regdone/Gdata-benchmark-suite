@@ -19,8 +19,8 @@ benchmark-suite/
 🛠️ Chuẩn bị môi trường:  
 
 1. Clone repo  
-git clone https://github.com/Gdata/benchmark-suite.git  
-cd benchmark-suite  
+git clone https://github.com/regdone/Gdata-benchmark-suite.git  
+cd gdata-benchmark-suite  
 
 2. Tạo môi trường Python  
 Khuyến nghị sử dụng venv hoặc conda  
