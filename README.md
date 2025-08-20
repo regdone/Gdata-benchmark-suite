@@ -24,7 +24,8 @@ cd benchmark-suite
 2. Tạo môi trường Python 
 Khuyến nghị sử dụng venv hoặc conda. 
 Cách 1: venv (mặc định có sẵn trong Python) 
-python3 -m venv venv source venv/bin/activate 
+python3 -m venv venv 
+source venv/bin/activate 
 
 Cách 2: conda (nếu dùng Miniconda/Anaconda) 
 conda create -n benchmark python=3.12 -y 
