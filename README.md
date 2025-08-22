@@ -1,81 +1,83 @@
-# GDATA Benchmark Suite
-Bộ công cụ benchmark CPU vs GPU dành cho khách hàng của Gdata. Giúp đo lường và so sánh hiệu năng với các workload thực tế như Deep Learning (MNIST), Matrix Multiplication, Stress Test GPU Memory và AI Workload giả lập.
+# Gdata Benchmark Suite
 
-# Nội dung Repo
-Gdata-benchmark-suite/ 
-├── README.md 
-├── requirements.txt 
-├── benchmark_all.sh 
-├── Matrix_Multiplication_Benchmark_CPU.py 
-├── Matrix_Multiplication_Benchmark_GPU.py 
-├── Training_MNIST_DeepLearning_CPU.py 
-├── Training_MNIST_DeepLearning_GPU.py 
-├── Stress_Test_GPU_Memory_CPU.py 
-├── Stress_Test_GPU_Memory_GPU.py 
-├── Real_AI_Workload_CPU.py 
-├── Real_AI_Workload_GPU.py
+A lightweight benchmark suite to demonstrate **GPU vs CPU performance** on real-world AI/ML workloads.  
+Designed for demo, customer evaluation, and quick benchmarking of **NVIDIA RTX 5880 Ada** or similar GPUs.
 
-# Chuẩn bị môi trường
-1. Clone repo 
-git clone https://github.com/Gdata/benchmark-suite.git 
-cd benchmark-suite
+---
 
-2. Tạo môi trường Python 
-Khuyến nghị sử dụng venv hoặc conda. 
-Cách 1: venv (mặc định có sẵn trong Python) 
-python3 -m venv venv 
-source venv/bin/activate 
+## 📂 Included Benchmarks
 
-Cách 2: conda (nếu dùng Miniconda/Anaconda) 
-conda create -n benchmark python=3.12 -y 
-conda activate benchmark
-3. Cài dependencies 
+1. **Matrix Multiplication (HPC baseline)**
+   - `Matrix_Multiplication_Benchmark_CPU.py`
+   - `Matrix_Multiplication_Benchmark_GPU.py`
+
+2. **Deep Learning (Vision / Image Classification)**
+   - `Training_CIFAR10_CNN_CPU.py`
+   - `Training_CIFAR10_CNN_GPU.py`
+
+3. **Stress Test (Memory allocation)**
+   - `Stress_Test_GPU_Memory_CPU.py`
+   - `Stress_Test_GPU_Memory_GPU.py`
+
+4. **Real AI Workload (NLP inference with Hugging Face Transformers)**
+   - `Real_AI_Workload_NLP_CPU.py`
+   - `Real_AI_Workload_NLP_GPU.py`
+
+---
+
+## ⚙️ Installation
+
+### 1. Clone repo
+```bash
+git clone https://github.com/Gdata/Gdata-benchmark-suite.git
+cd Gdata-benchmark-suite
+
+### Setup Python environment
+We recommend Python ≥ 3.10. On Linux/WSL2/Windows Server:
+
+### 2. Setup Python environment
+We recommend Python ≥ 3.10. On Linux/WSL2/Windows Server:
+``` bash
+python3 -m venv venv
+source venv/bin/activate    # Windows: venv\Scripts\activate
+pip install --upgrade pip
 pip install -r requirements.txt
 
-# Chạy Benchmark
-Chạy toàn bộ benchmark 
+For PyTorch GPU, ensure you install the correct CUDA-enabled wheel.
+See https://pytorch.org/get-started/locally/
+
+## 🚀 Running Benchmarks
+
+Run all benchmarks at once:
+``` bash
 ./benchmark_all.sh
-Tự động chạy 8 script (CPU & GPU).
-Kết quả được lưu vào file benchmark_results.log.
+Results will be saved in ./results/benchmark_YYYYMMDD_HHMMSS.log.
 
-Chạy từng benchmark riêng lẻ 
-# GEMM
+Run a specific benchmark:
+``` bash
+# Example: GEMM on GPU with 16K matrix
 MATRIX_N=16384 python3 Matrix_Multiplication_Benchmark_GPU.py
-MATRIX_N=8192  python3 Matrix_Multiplication_Benchmark_CPU.py
 
-# CIFAR-10
+# Example: CIFAR10 CNN on GPU for 5 epochs
 EPOCHS=5 BATCH=256 python3 Training_CIFAR10_CNN_GPU.py
-EPOCHS=5 BATCH=128 python3 Training_CIFAR10_CNN_CPU.py
 
-# VRAM stress
-CHUNK_MB=512 MAX_GB_HINT=80 python3 Stress_Test_GPU_Memory_GPU.py
-ALLOC_GB=16 CHUNK_MB=256 python3 Stress_Test_GPU_Memory_CPU.py
+## 📊 Output Example
+``` bash
+>>> Running Matrix_Multiplication_Benchmark_GPU.py
+Run 1/3: 5.213 s | 17000.5 GFLOP/s
+Run 2/3: 5.210 s | 17020.1 GFLOP/s
+AVG perf: 17010 GFLOP/s (GPU)
 
-# NLP
-SAMPLES=20000 BATCH=64 USE_FP16=1 python3 Real_AI_Workload_NLP_GPU.py
-SAMPLES=10000 BATCH=32          python3 Real_AI_Workload_NLP_CPU.py
+## 🖥️ Windows Notes
+On Windows Server 2022 with GPU passthrough:
 
+- Install CUDA Toolkit + cuDNN: https://developer.nvidia.com/cuda-downloads
+- Use PowerShell or Git Bash to run scripts
+- Replace ./benchmark_all.sh with direct Python runs, or use benchmark_all.bat (optional)
 
-# Kết quả Benchmark
-File benchmark_results.log sẽ chứa: 
-- Thời gian chạy (CPU vs GPU) 
-- Độ chính xác (accuracy, loss) khi train Deep Learning 
-- Thông tin stress test GPU Memory 
+## 📚 References
+- TensorFlow GEMM micro-benchmarks (used in MLPerf & blogs)
+- Keras CIFAR10 CNN official example: https://keras.io/examples/vision/cifar10_cnn/
+- Hugging Face Transformers sentiment-analysis pipeline
+- PyTorch memory stress patterns (community tests for max batch size)
 
-Ví dụ output:
-
-> Running Matrix_Multiplication_Benchmark_GPU.py  
-CPU time: 1.55s  
-GPU time: 0.25s  
-
-# Hỗ trợ Windows Machine
-Các script .py chạy bình thường trên Windows VM (với Python + TensorFlow). 
-Với Windows, thay vì benchmark_all.sh, có thể chạy thủ công từng script. 
-Có thể bổ sung file batch benchmark_all.bat nếu cần chạy tự động.
-
-# Yêu cầu hệ thống
-Python 3.10+ (tested on 3.12, 3.13) 
-TensorFlow 2.20.0 
-GPU NVIDIA + driver CUDA/cuDNN tương ứng (nếu muốn chạy GPU mode)
-
-© 2025 Gdata – Benchmark Suite

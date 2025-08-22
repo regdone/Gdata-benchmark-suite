@@ -1,35 +1,41 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Gdata Benchmark Suite
+# Script này sẽ chạy toàn bộ 8 benchmark và ghi log ra ./results/
+# Yêu cầu: Python >= 3.10 + pip install -r requirements.txt
+
 set -e
+mkdir -p results
 
-LOGFILE="benchmark_results.log"
-echo "===== GPU/CPU Benchmark Suite =====" > $LOGFILE
-echo "Start time: $(date)" >> $LOGFILE
-echo "" >> $LOGFILE
+timestamp=$(date +"%Y%m%d_%H%M%S")
+logfile="results/benchmark_${timestamp}.log"
 
-run_benchmark () {
-    SCRIPT=$1
-    echo ">>> Running $SCRIPT" | tee -a $LOGFILE
-    echo "----------------------------------------" >> $LOGFILE
-    { time python3 $SCRIPT; } >> $LOGFILE 2>&1
-    echo "" >> $LOGFILE
+echo "=== Gdata Benchmark Suite ===" | tee -a "$logfile"
+echo "Start time: $(date)" | tee -a "$logfile"
+echo "----------------------------------------" | tee -a "$logfile"
+
+run_py () {
+    script=$1
+    echo -e "\n>>> Running $script" | tee -a "$logfile"
+    echo "----------------------------------------" | tee -a "$logfile"
+    { time python3 "$script"; } 2>&1 | tee -a "$logfile"
 }
 
-# List of benchmarks
-BENCHMARKS=(
-    "Matrix_Multiplication_Benchmark_CPU.py"
-    "Matrix_Multiplication_Benchmark_GPU.py"
-    "Training_MNIST_DeepLearning_CPU.py"
-    "Training_MNIST_DeepLearning_GPU.py"
-    "Stress_Test_GPU_Memory_CPU.py"
-    "Stress_Test_GPU_Memory_GPU.py"
-    "Real_AI_Workload_CPU.py"
-    "Real_AI_Workload_GPU.py"
-)
+# Matrix Multiplication
+MATRIX_N=8192 RUNS=3 run_py Matrix_Multiplication_Benchmark_CPU.py
+MATRIX_N=16384 RUNS=3 run_py Matrix_Multiplication_Benchmark_GPU.py
 
-for bm in "${BENCHMARKS[@]}"; do
-    run_benchmark $bm
-done
+# Training CIFAR10 CNN
+EPOCHS=3 BATCH=128 run_py Training_CIFAR10_CNN_CPU.py
+EPOCHS=3 BATCH=256 run_py Training_CIFAR10_CNN_GPU.py
 
-echo "===== Benchmark completed at $(date) =====" >> $LOGFILE
-echo "All results saved to $LOGFILE"
+# Stress Test Memory
+ALLOC_GB=8 CHUNK_MB=256 run_py Stress_Test_GPU_Memory_CPU.py
+CHUNK_MB=512 MAX_GB_HINT=80 run_py Stress_Test_GPU_Memory_GPU.py
 
+# NLP Real AI Workload
+SAMPLES=2000 BATCH=32 run_py Real_AI_Workload_NLP_CPU.py
+SAMPLES=4000 BATCH=64 USE_FP16=1 run_py Real_AI_Workload_NLP_GPU.py
+
+echo -e "\n=== Benchmark finished ===" | tee -a "$logfile"
+echo "End time: $(date)" | tee -a "$logfile"
+echo "Results saved to $logfile"

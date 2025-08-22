@@ -1,14 +1,16 @@
-# TensorFlow (GPU build) – đã hoạt động ở máy anh
+# === Core ML Frameworks ===
+# TensorFlow (GPU-enabled build) – supports CUDA 12.x, cuDNN 9+
 tensorflow>=2.18
 
-# PyTorch + CUDA 12.x (chọn bản khớp CUDA driver của VM)
+# PyTorch + CUDA (chọn bản khớp driver/cuda toolkit trên máy khách)
+# Nếu pip install mặc định fail -> khuyến nghị khách theo hướng dẫn https://pytorch.org/get-started/locally/
 torch>=2.3
-torchaudio>=2.3
 torchvision>=0.18
+torchaudio>=2.3
 
-# Hugging Face
+# === Hugging Face (NLP / Transformers) ===
 transformers>=4.43
 accelerate>=0.33
 
-# Tiện ích
+# === Utilities ===
 psutil>=5.9
