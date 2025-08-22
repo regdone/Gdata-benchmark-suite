@@ -2,7 +2,7 @@
 Bộ công cụ benchmark CPU vs GPU dành cho khách hàng của Gdata. Giúp đo lường và so sánh hiệu năng với các workload thực tế như Deep Learning (MNIST), Matrix Multiplication, Stress Test GPU Memory và AI Workload giả lập.
 
 📂 Nội dung repo 
-benchmark-suite/ 
+Gdata-benchmark-suite/ 
 ├── README.md 
 ├── requirements.txt 
 ├── benchmark_all.sh 
@@ -24,7 +24,8 @@ cd benchmark-suite
 2. Tạo môi trường Python 
 Khuyến nghị sử dụng venv hoặc conda. 
 Cách 1: venv (mặc định có sẵn trong Python) 
-python3 -m venv venv source venv/bin/activate 
+python3 -m venv venv 
+source venv/bin/activate 
 
 Cách 2: conda (nếu dùng Miniconda/Anaconda) 
 conda create -n benchmark python=3.12 -y 
@@ -39,8 +40,22 @@ Tự động chạy 8 script (CPU & GPU).
 Kết quả được lưu vào file benchmark_results.log.
 
 Chạy từng benchmark riêng lẻ 
-python3 Training_MNIST_DeepLearning_GPU.py 
-python3 Matrix_Multiplication_Benchmark_CPU.py
+# GEMM
+MATRIX_N=16384 python3 Matrix_Multiplication_Benchmark_GPU.py
+MATRIX_N=8192  python3 Matrix_Multiplication_Benchmark_CPU.py
+
+# CIFAR-10
+EPOCHS=5 BATCH=256 python3 Training_CIFAR10_CNN_GPU.py
+EPOCHS=5 BATCH=128 python3 Training_CIFAR10_CNN_CPU.py
+
+# VRAM stress
+CHUNK_MB=512 MAX_GB_HINT=80 python3 Stress_Test_GPU_Memory_GPU.py
+ALLOC_GB=16 CHUNK_MB=256 python3 Stress_Test_GPU_Memory_CPU.py
+
+# NLP
+SAMPLES=20000 BATCH=64 USE_FP16=1 python3 Real_AI_Workload_NLP_GPU.py
+SAMPLES=10000 BATCH=32          python3 Real_AI_Workload_NLP_CPU.py
+
 
 📊 Kết quả benchmark 
 File benchmark_results.log sẽ chứa: 

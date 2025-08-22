@@ -1,3 +1,14 @@
-tensorflow==2.20.0
-numpy
+# TensorFlow (GPU build) – đã hoạt động ở máy anh
+tensorflow>=2.18
 
+# PyTorch + CUDA 12.x (chọn bản khớp CUDA driver của VM)
+torch>=2.3
+torchaudio>=2.3
+torchvision>=0.18
+
+# Hugging Face
+transformers>=4.43
+accelerate>=0.33
+
+# Tiện ích
+psutil>=5.9
