@@ -29,7 +29,7 @@ Designed for demo, customer evaluation, and quick benchmarking of **NVIDIA RTX 5
 
 ### 1. Clone repo
 ```bash
-git clone https://github.com/Gdata/Gdata-benchmark-suite.git
+git clone https://github.com/regdone/Gdata-benchmark-suite.git
 cd Gdata-benchmark-suite
 
 ### Setup Python environment
