@@ -64,9 +64,9 @@ File benchmark_results.log sẽ chứa:
 
 Ví dụ output:
 
->>> Running Matrix_Multiplication_Benchmark_GPU.py 
-CPU time: 1.55s 
-GPU time: 0.25s
+>>> Running Matrix_Multiplication_Benchmark_GPU.py  
+CPU time: 1.55s  
+GPU time: 0.25s  
 
 # Hỗ trợ Windows Machine
 Các script .py chạy bình thường trên Windows VM (với Python + TensorFlow). 
