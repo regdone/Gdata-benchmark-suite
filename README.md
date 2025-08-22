@@ -1,7 +1,7 @@
-🚀 Gdata Benchmark Suite 
+# GDATA Benchmark Suite
 Bộ công cụ benchmark CPU vs GPU dành cho khách hàng của Gdata. Giúp đo lường và so sánh hiệu năng với các workload thực tế như Deep Learning (MNIST), Matrix Multiplication, Stress Test GPU Memory và AI Workload giả lập.
 
-📂 Nội dung repo 
+# Nội dung Repo
 Gdata-benchmark-suite/ 
 ├── README.md 
 ├── requirements.txt 
@@ -15,8 +15,7 @@ Gdata-benchmark-suite/
 ├── Real_AI_Workload_CPU.py 
 ├── Real_AI_Workload_GPU.py
 
-🛠️ Chuẩn bị môi trường:
-
+# Chuẩn bị môi trường
 1. Clone repo 
 git clone https://github.com/Gdata/benchmark-suite.git 
 cd benchmark-suite
@@ -33,7 +32,7 @@ conda activate benchmark
 3. Cài dependencies 
 pip install -r requirements.txt
 
-🧪 Chạy benchmark 
+# Chạy Benchmark
 Chạy toàn bộ benchmark 
 ./benchmark_all.sh
 Tự động chạy 8 script (CPU & GPU).
@@ -57,7 +56,7 @@ SAMPLES=20000 BATCH=64 USE_FP16=1 python3 Real_AI_Workload_NLP_GPU.py
 SAMPLES=10000 BATCH=32          python3 Real_AI_Workload_NLP_CPU.py
 
 
-📊 Kết quả benchmark 
+# Kết quả Benchmark
 File benchmark_results.log sẽ chứa: 
 - Thời gian chạy (CPU vs GPU) 
 - Độ chính xác (accuracy, loss) khi train Deep Learning 
@@ -69,12 +68,12 @@ Ví dụ output:
 CPU time: 1.55s 
 GPU time: 0.25s
 
-💻 Hỗ trợ Windows 
+# Hỗ trợ Windows Machine
 Các script .py chạy bình thường trên Windows VM (với Python + TensorFlow). 
 Với Windows, thay vì benchmark_all.sh, có thể chạy thủ công từng script. 
 Có thể bổ sung file batch benchmark_all.bat nếu cần chạy tự động.
 
-📦 Yêu cầu hệ thống 
+# Yêu cầu hệ thống
 Python 3.10+ (tested on 3.12, 3.13) 
 TensorFlow 2.20.0 
 GPU NVIDIA + driver CUDA/cuDNN tương ứng (nếu muốn chạy GPU mode)
