@@ -27,17 +27,14 @@ Designed for demo, customer evaluation, and quick benchmarking of **NVIDIA RTX 5
 
 ## ⚙️ Installation
 
-### 1. Clone repo
+1. Clone repo
 ```bash
 git clone https://github.com/Gdata/Gdata-benchmark-suite.git
 cd Gdata-benchmark-suite
 
-### Setup Python environment
+2. Setup Python environment
 We recommend Python ≥ 3.10. On Linux/WSL2/Windows Server:
-
-### 2. Setup Python environment
-We recommend Python ≥ 3.10. On Linux/WSL2/Windows Server:
-``` bash
+```bash
 python3 -m venv venv
 source venv/bin/activate    # Windows: venv\Scripts\activate
 pip install --upgrade pip
