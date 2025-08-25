@@ -52,28 +52,28 @@ Results will be saved in ./results/benchmark_YYYYMMDD_HHMMSS.log.
 
 ### Run a specific benchmark:
 
-Example: GEMM on GPU with 16K matrix
+Example: GEMM on GPU with 16K matrix  
 `MATRIX_N=16384 python3 Matrix_Multiplication_Benchmark_GPU.py  
 `
-Example: CIFAR10 CNN on GPU for 5 epochs
+Example: CIFAR10 CNN on GPU for 5 epochs  
 `EPOCHS=5 BATCH=256 python3 Training_CIFAR10_CNN_GPU.py  
 `
 ## 📊 Output Example
 > Running Matrix_Multiplication_Benchmark_GPU.py
-Run 1/3: 5.213 s | 17000.5 GFLOP/s
-Run 2/3: 5.210 s | 17020.1 GFLOP/s
-AVG perf: 17010 GFLOP/s (GPU)
+Run 1/3: 5.213 s | 17000.5 GFLOP/s  
+Run 2/3: 5.210 s | 17020.1 GFLOP/s  
+AVG perf: 17010 GFLOP/s (GPU)  
 
 ## 🖥️ Windows Notes
-On Windows Server 2022 with GPU passthrough:
+On Windows Server 2022 with GPU passthrough:  
 
-- Install CUDA Toolkit + cuDNN: https://developer.nvidia.com/cuda-downloads
-- Use PowerShell or Git Bash to run scripts
-- Replace ./benchmark_all.sh with direct Python runs, or use benchmark_all.bat (optional)
+- Install CUDA Toolkit + cuDNN: https://developer.nvidia.com/cuda-downloads  
+- Use PowerShell or Git Bash to run scripts  
+- Replace ./benchmark_all.sh with direct Python runs, or use benchmark_all.bat (optional)  
 
 ## 📚 References
-- TensorFlow GEMM micro-benchmarks (used in MLPerf & blogs)
-- Keras CIFAR10 CNN official example: https://keras.io/examples/vision/cifar10_cnn/
-- Hugging Face Transformers sentiment-analysis pipeline
+- TensorFlow GEMM micro-benchmarks (used in MLPerf & blogs)  
+- Keras CIFAR10 CNN official example: https://keras.io/examples/vision/cifar10_cnn/  
+- Hugging Face Transformers sentiment-analysis pipeline  
 - PyTorch memory stress patterns (community tests for max batch size)
 
