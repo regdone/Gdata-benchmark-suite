@@ -36,9 +36,9 @@ cd Gdata-benchmark-suite`
 We recommend Python ≥ 3.10. On Linux/WSL2/Windows Server:
 
 `python3 -m venv venv`  
-`source venv/bin/activate    # Windows: venv\Scripts\activate  `
-`pip install --upgrade pip  `
-`pip install -r requirements.txt`  `
+`source venv/bin/activate    # Windows: venv\Scripts\activate`  
+`pip install --upgrade pip`
+`pip install -r requirements.txt`
 
 For PyTorch GPU, ensure you install the correct CUDA-enabled wheel.
 See https://pytorch.org/get-started/locally/
