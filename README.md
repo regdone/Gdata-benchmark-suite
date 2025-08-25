@@ -27,39 +27,38 @@ Designed for demo, customer evaluation, and quick benchmarking of **NVIDIA RTX 5
 
 ## ⚙️ Installation
 
-1. Clone repo
-```bash
-git clone https://github.com/Gdata/Gdata-benchmark-suite.git
-cd Gdata-benchmark-suite
+### 1. Clone repo
 
-2. Setup Python environment
+`git clone https://github.com/Gdata/Gdata-benchmark-suite.git
+cd Gdata-benchmark-suite`
+
+### 2. Setup Python environment
 We recommend Python ≥ 3.10. On Linux/WSL2/Windows Server:
-```bash
-python3 -m venv venv
+
+`python3 -m venv venv
 source venv/bin/activate    # Windows: venv\Scripts\activate
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install -r requirements.txt`
 
 For PyTorch GPU, ensure you install the correct CUDA-enabled wheel.
 See https://pytorch.org/get-started/locally/
 
 ## 🚀 Running Benchmarks
 
-Run all benchmarks at once:
-``` bash
-./benchmark_all.sh
+### Run all benchmarks at once:
+
+`./benchmark_all.sh`
 Results will be saved in ./results/benchmark_YYYYMMDD_HHMMSS.log.
 
-Run a specific benchmark:
-``` bash
-# Example: GEMM on GPU with 16K matrix
-MATRIX_N=16384 python3 Matrix_Multiplication_Benchmark_GPU.py
+### Run a specific benchmark:
 
-# Example: CIFAR10 CNN on GPU for 5 epochs
-EPOCHS=5 BATCH=256 python3 Training_CIFAR10_CNN_GPU.py
-
+Example: GEMM on GPU with 16K matrix
+`MATRIX_N=16384 python3 Matrix_Multiplication_Benchmark_GPU.py
+`
+Example: CIFAR10 CNN on GPU for 5 epochs
+`EPOCHS=5 BATCH=256 python3 Training_CIFAR10_CNN_GPU.py
+`
 ## 📊 Output Example
-``` bash
 >>> Running Matrix_Multiplication_Benchmark_GPU.py
 Run 1/3: 5.213 s | 17000.5 GFLOP/s
 Run 2/3: 5.210 s | 17020.1 GFLOP/s
